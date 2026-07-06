@@ -4,13 +4,15 @@ public class GenerateMessageRequest {
 
     private String relationshipLevel;
     private String message;
+    private String scenario;
 
     public GenerateMessageRequest() {
     }
 
-    public GenerateMessageRequest(String relationshipLevel, String message) {
+    public GenerateMessageRequest(String relationshipLevel, String message, String scenario) {
         this.relationshipLevel = relationshipLevel;
         this.message = message;
+        this.scenario = scenario;
     }
 
     public String getRelationshipLevel() {
@@ -27,5 +29,13 @@ public class GenerateMessageRequest {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getScenario() {
+        return scenario;
+    }
+
+    public void setScenario(String scenario) {
+        this.scenario = scenario;
     }
 }

@@ -16,7 +16,9 @@ public class MessageService {
     public GenerateMessageResponse generateMessage(GenerateMessageRequest request) {
         String aiResponse = aiService.generateBusinessMessage(
             request.getRelationshipLevel(),
-            request.getMessage());
+            request.getMessage(),
+            request.getScenario()
+        );
 
     return new GenerateMessageResponse(
             aiResponse,
