@@ -12,20 +12,34 @@ public class AIService {
         this.chatClient = builder.build();
     }
 
-    public String generateBusinessMessage(String relationshipLevel, String message) {
+    public String generateBusinessMessage(String relationshipLevel, String message, String scenario) {
 
         String prompt = """
-                Convert the following message into polite Japanese.
+                            You are a Japanese business communication expert.
 
-                Relationship:
-                %s
+                        Your task is to convert the user's message into natural and polite Japanese.
 
-                Message:
-                %s
-                """.formatted(relationshipLevel, message);
+                        Rules:
+                            - Return ONLY the final Japanese message.
+                            - Do NOT explain your answer.
+                            - Do NOT provide multiple options.
+                            - Do NOT include romaji.
+                            - Do NOT include English.
+                            - Make it sound natural in a Japanese workplace.
+                            - Use the relationship to choose the correct politeness level.
 
-        return chatClient.prompt(prompt)
-                .call()
-                .content();
+                        Scenario: 
+                                %s
+                        Message:
+                                %s
+                        """.formatted(scenario, relationshipLevel, message);
+
+       try {
+    return chatClient.prompt(prompt)
+            .call()
+            .content();
+        } catch (Exception e) {
+            return "Sorry, the AI service is currently unavailable. Please try again later.";
+        }
     }
 }
