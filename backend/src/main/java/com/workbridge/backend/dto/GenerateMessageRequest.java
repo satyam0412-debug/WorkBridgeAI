@@ -1,10 +1,17 @@
 package com.workbridge.backend.dto;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class GenerateMessageRequest {
 
-    private String relationshipLevel;
-    private String message;
+    @NotBlank(message = "Scenario is required")
     private String scenario;
+
+    @NotBlank(message = "Relationship level is required")
+    private String relationshipLevel;
+
+    @NotBlank(message = "Message is required")
+    private String message;
 
     public GenerateMessageRequest() {
     }
