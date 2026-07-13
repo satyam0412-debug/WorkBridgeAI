@@ -58,9 +58,6 @@ public class AIService {
     public String generateBusinessMessage(String relationshipLevel, String message, String scenario) {
          logger.info("Generating business message ....");
          String scenarioInstruction = getScenarioInstruction(scenario);
-         logger.info("Scenario selected: {}", scenario);
-        logger.info("Instruction: {}", scenarioInstruction);
-
         String prompt = """
 You are a Japanese business communication expert.
 
