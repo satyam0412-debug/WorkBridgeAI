@@ -1,19 +1,23 @@
 package com.workbridge.backend.service;
-
 import org.springframework.stereotype.Service;
 
 import com.workbridge.backend.dto.GenerateMessageRequest;
 import com.workbridge.backend.dto.GenerateMessageResponse;
 import com.workbridge.backend.generator.MessageGenerator;
+import com.workbridge.backend.generator.MessageGeneratorFactory;
+
 @Service
 public class MessageService {
-private final MessageGenerator messageGenerator;
-    public MessageService(MessageGenerator messageGenerator) {
-        this.messageGenerator = messageGenerator;
+private final MessageGeneratorFactory factory;
+    public MessageService(MessageGeneratorFactory factory) {
+        this.factory = factory;
     }
 
     public GenerateMessageResponse generateMessage(GenerateMessageRequest request) {
-        String aiResponse = messageGenerator.generateBusinessMessage(
+
+        MessageGenerator generator = factory.getGenerator("openai"); // You can change this to "gemini" or any other provider as needed
+        
+        String aiResponse = generator.generateBusinessMessage(
             request.getRelationshipLevel(),
             request.getMessage(),
             request.getScenario()
