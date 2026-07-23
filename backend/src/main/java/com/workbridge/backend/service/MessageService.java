@@ -4,17 +4,16 @@ import org.springframework.stereotype.Service;
 
 import com.workbridge.backend.dto.GenerateMessageRequest;
 import com.workbridge.backend.dto.GenerateMessageResponse;
-
+import com.workbridge.backend.generator.MessageGenerator;
 @Service
 public class MessageService {
-    private final AIService aiService;
-
-    public MessageService(AIService aiService) {
-        this.aiService = aiService;
+private final MessageGenerator messageGenerator;
+    public MessageService(MessageGenerator messageGenerator) {
+        this.messageGenerator = messageGenerator;
     }
 
     public GenerateMessageResponse generateMessage(GenerateMessageRequest request) {
-        String aiResponse = aiService.generateBusinessMessage(
+        String aiResponse = messageGenerator.generateBusinessMessage(
             request.getRelationshipLevel(),
             request.getMessage(),
             request.getScenario()

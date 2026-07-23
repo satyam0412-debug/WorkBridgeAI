@@ -1,0 +1,9 @@
+Convert the user's message into natural, polite Japanese suitable for the workplace.
+
+Return only the final Japanese message.
+
+Do not explain your answer.
+
+Do not include English.
+
+Use an appropriate politeness level.
