@@ -4,6 +4,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.stereotype.Service;
 
+import com.workbridge.backend.dto.GeneratedMessage;
 import com.workbridge.backend.service.PromptLoader;
 import com.workbridge.backend.service.ScenarioFileMapper;
 
@@ -21,7 +22,7 @@ public class GeminiMessageGenerator implements MessageGenerator {
 
 
     @Override
-    public String generateBusinessMessage(String relationshipLevel, String message, String scenario) {
+    public GeneratedMessage generateBusinessMessage(String relationshipLevel, String message, String scenario) {
          logger.info("Generating business message ....");
          String fileName = ScenarioFileMapper.getFileName(scenario);
         String scenarioInstruction = promptLoader.loadPrompt(fileName);
@@ -38,11 +39,11 @@ public class GeminiMessageGenerator implements MessageGenerator {
                 .content();
             logger.info("Business message generated successfully.");
 
-            return response;
+            return new GeneratedMessage(response, "Google Gemini");
 
         } catch (Exception e) {
             logger.error("Failed to generate business message.", e);
-            return "Sorry, the AI service is currently unavailable. Please try again later.";
+            return new GeneratedMessage("Sorry, the AI service is currently unavailable. Please try again later.", "Google Gemini");
         }
     }
 }
