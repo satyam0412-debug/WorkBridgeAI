@@ -1,5 +1,4 @@
 package com.workbridge.backend.exception;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,6 +7,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import com.workbridge.backend.dto.ApiResponse;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -23,5 +24,17 @@ public class GlobalExceptionHandler {
                 errors.put(error.getField(), error.getDefaultMessage()));
 
         return errors;
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ApiResponse<Void> handleIllegalArgumentException(
+            IllegalArgumentException ex) {
+
+        return new ApiResponse<>(
+                false,
+                ex.getMessage(),
+                null
+        );
     }
 }
