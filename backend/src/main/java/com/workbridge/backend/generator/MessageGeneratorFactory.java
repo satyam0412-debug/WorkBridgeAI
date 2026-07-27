@@ -6,9 +6,11 @@ import org.springframework.stereotype.Component;
 public class MessageGeneratorFactory {
 
     private final GeminiMessageGenerator geminiGenerator;
+    private final OpenAIMessageGenerator openAIGenerator;
 
-    public MessageGeneratorFactory(GeminiMessageGenerator geminiGenerator) {
+    public MessageGeneratorFactory(GeminiMessageGenerator geminiGenerator, OpenAIMessageGenerator openAIGenerator) {
         this.geminiGenerator = geminiGenerator;
+        this.openAIGenerator = openAIGenerator;
     }
 
     public MessageGenerator getGenerator(String provider) {
@@ -16,7 +18,10 @@ public class MessageGeneratorFactory {
         if ("gemini".equalsIgnoreCase(provider)) {
             return geminiGenerator;
         }
-
+        
+        if ("openai".equalsIgnoreCase(provider)) {
+            return openAIGenerator;
+        }
         throw new IllegalArgumentException("Unsupported AI provider: " + provider);
     }
 }
