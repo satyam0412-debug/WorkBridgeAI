@@ -13,13 +13,17 @@ public class GenerateMessageRequest {
     @NotBlank(message = "Message is required")
     private String message;
 
+    @NotBlank(message = "Provider is required")
+    private String provider;
+
     public GenerateMessageRequest() {
     }
 
-    public GenerateMessageRequest(String relationshipLevel, String message, String scenario) {
+    public GenerateMessageRequest(String relationshipLevel, String message, String scenario, String provider) {
         this.relationshipLevel = relationshipLevel;
         this.message = message;
         this.scenario = scenario;
+        this.provider = provider;
     }
 
     public String getRelationshipLevel() {
@@ -44,5 +48,13 @@ public class GenerateMessageRequest {
 
     public void setScenario(String scenario) {
         this.scenario = scenario;
+    }
+
+    public String getProvider() {
+        return provider;
+    }
+
+    public void setProvider(String provider) {
+        this.provider = provider;
     }
 }

@@ -16,7 +16,7 @@ private final MessageGeneratorFactory factory;
 
     public GenerateMessageResponse generateMessage(GenerateMessageRequest request) {
 
-        MessageGenerator generator = factory.getGenerator("openai"); // You can change this to "gemini" or any other provider as needed
+        MessageGenerator generator = factory.getGenerator(request.getProvider());
         
         GeneratedMessage generatedMessage = generator.generateBusinessMessage(
             request.getRelationshipLevel(),
