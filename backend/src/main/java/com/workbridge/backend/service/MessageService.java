@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import com.workbridge.backend.dto.GenerateMessageRequest;
 import com.workbridge.backend.dto.GenerateMessageResponse;
 import com.workbridge.backend.dto.GeneratedMessage;
+import com.workbridge.backend.enums.AIProvider;
 import com.workbridge.backend.router.AIRouter;
 
 @Service
@@ -16,8 +17,10 @@ public class MessageService {
 
     public GenerateMessageResponse generateMessage(GenerateMessageRequest request) {
 
+        AIProvider provider = AIProvider.fromString(request.getProvider());
+
         GeneratedMessage generatedMessage = router.generate(
-            request.getProvider(),
+            provider,
             request.getRelationshipLevel(),
             request.getMessage(),
             request.getScenario()
