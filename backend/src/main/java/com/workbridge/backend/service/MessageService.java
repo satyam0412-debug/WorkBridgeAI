@@ -4,21 +4,20 @@ import org.springframework.stereotype.Service;
 import com.workbridge.backend.dto.GenerateMessageRequest;
 import com.workbridge.backend.dto.GenerateMessageResponse;
 import com.workbridge.backend.dto.GeneratedMessage;
-import com.workbridge.backend.generator.MessageGenerator;
-import com.workbridge.backend.generator.MessageGeneratorFactory;
+import com.workbridge.backend.router.AIRouter;
 
 @Service
 public class MessageService {
-private final MessageGeneratorFactory factory;
-    public MessageService(MessageGeneratorFactory factory) {
-        this.factory = factory;
+    private final AIRouter router;
+
+    public MessageService(AIRouter router) {
+        this.router = router;
     }
 
     public GenerateMessageResponse generateMessage(GenerateMessageRequest request) {
 
-        MessageGenerator generator = factory.getGenerator(request.getProvider());
-        
-        GeneratedMessage generatedMessage = generator.generateBusinessMessage(
+        GeneratedMessage generatedMessage = router.generate(
+            request.getProvider(),
             request.getRelationshipLevel(),
             request.getMessage(),
             request.getScenario()

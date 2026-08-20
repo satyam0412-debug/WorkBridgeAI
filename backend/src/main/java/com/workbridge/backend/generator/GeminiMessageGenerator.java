@@ -43,7 +43,7 @@ public class GeminiMessageGenerator implements MessageGenerator {
 
         } catch (Exception e) {
             logger.error("Failed to generate business message.", e);
-            return new GeneratedMessage("Sorry, the AI service is currently unavailable. Please try again later.", "Google Gemini");
+            throw new RuntimeException("Failed to generate business message.", e);
         }
     }
 }
