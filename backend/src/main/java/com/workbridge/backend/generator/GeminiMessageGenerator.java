@@ -3,7 +3,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.stereotype.Service;
-
+import com.workbridge.backend.exception.ProviderUnavailableException;
 import com.workbridge.backend.dto.GeneratedMessage;
 import com.workbridge.backend.service.PromptLoader;
 import com.workbridge.backend.service.ScenarioFileMapper;
@@ -43,7 +43,8 @@ public class GeminiMessageGenerator implements MessageGenerator {
 
         } catch (Exception e) {
             logger.error("Failed to generate business message.", e);
-            throw new RuntimeException("Failed to generate business message.", e);
+            throw new ProviderUnavailableException("gemini", "Gemini provider failed to generate message.", e);
+        
         }
     }
 }
