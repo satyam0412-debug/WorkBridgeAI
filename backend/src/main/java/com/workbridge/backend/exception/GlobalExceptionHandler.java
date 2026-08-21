@@ -7,6 +7,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import com.workbridge.backend.exception.ProviderUnavailableException;
 
 import com.workbridge.backend.dto.ApiResponse;
 
@@ -34,6 +35,18 @@ public class GlobalExceptionHandler {
         return new ApiResponse<>(
                 false,
                 ex.getMessage(),
+                null
+        );
+    }
+
+        @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
+    @ExceptionHandler(ProviderUnavailableException.class)
+    public ApiResponse<Void> handleProviderUnavailableException(
+            ProviderUnavailableException ex) {
+
+        return new ApiResponse<>(
+                false,
+                "AI provider '" + ex.getProvider() + "' is currently unavailable.",
                 null
         );
     }
