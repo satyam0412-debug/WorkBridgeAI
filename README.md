@@ -12,6 +12,7 @@ Help international professionals communicate naturally and confidently in Japane
 - Spring Boot
 - Maven
 - OpenAI API (planned)
+- Gemini API (planned)
 - React (planned)
 
 ## Status
